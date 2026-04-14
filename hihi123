@@ -1,0 +1,126 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: CauHinhGameScreen(),
+    );
+  }
+}
+
+class CauHinhGameScreen extends StatefulWidget {
+  const CauHinhGameScreen({super.key});
+
+  @override
+  State<CauHinhGameScreen> createState() => _CauHinhGameScreenState();
+}
+
+class _CauHinhGameScreenState extends State<CauHinhGameScreen> {
+  bool amThanh = false;
+  bool tuDongLuu = false;
+  double volume = 0.2;
+
+  int diemCaoNhat = 3500;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Cấu hình game đố vui"),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            /// Âm thanh
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Âm thanh",
+                    style: TextStyle(fontSize: 16)),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: amThanh,
+                      onChanged: (value) {
+                        setState(() {
+                          amThanh = value!;
+                        });
+                      },
+                    ),
+                    const Text("Bật")
+                  ],
+                )
+              ],
+            ),
+
+            const SizedBox(height: 10),
+
+            /// Điểm cao nhất
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Điểm cao nhất",
+                    style: TextStyle(fontSize: 16)),
+                Text("$diemCaoNhat",
+                    style: const TextStyle(fontSize: 16))
+              ],
+            ),
+
+            const SizedBox(height: 10),
+
+            /// Tự động lưu game
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Tự động lưu game",
+                    style: TextStyle(fontSize: 16)),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: tuDongLuu,
+                      onChanged: (value) {
+                        setState(() {
+                          tuDongLuu = value!;
+                        });
+                      },
+                    ),
+                    const Text("Bật")
+                  ],
+                )
+              ],
+            ),
+
+            const SizedBox(height: 25),
+
+            /// Volume
+            const Text("Volume",
+                style: TextStyle(fontSize: 16)),
+
+            Slider(
+value: volume,
+              min: 0,
+              max: 1,
+              onChanged: (value) {
+                setState(() {
+                  volume = value;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
